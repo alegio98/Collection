@@ -1,0 +1,11 @@
+name = "Collection"
+uuid = "5dd70918-5117-42ac-8ebd-f4f98b280027"
+authors = ["alegio98 <alessandrogiovannini7@yahoo.it>"]
+version = "0.1.0"
+
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+LinearAlgebraicRepresentation = "95167b0c-186a-594b-a231-52369c6de044"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+ViewerGL = "32496ab8-9004-11e9-0205-c9e71bda7ab0"
