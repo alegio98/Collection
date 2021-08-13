@@ -1,7 +1,6 @@
 using Collection
 using Test
-using LinearAlgebraicRepresentation
-Lar = LinearAlgebraicRepresentation
+
 
 function BoxCalculation(Vertices)
 								  #minimum ritorna il più piccolo della collezione
@@ -22,129 +21,129 @@ function BoxCalculation(Vertices)
 end
 
 @testset "circle" begin
-	@test BoxCalculation(Lar.circle()()[1])==4
-	@test BoxCalculation(Lar.circle(1, 2*pi)()[1])==4 # è come di default
-	@test BoxCalculation(Lar.circle(2., 2*pi)()[1])==16
-	@test BoxCalculation(Lar.circle(3, 2*pi)()[1])==36
-	@test BoxCalculation(Lar.circle(5, pi/2)()[1])==25 #aggiunto
-	@test BoxCalculation(Lar.circle(7, 2*pi)()[1])==196
+	@test BoxCalculation(Collection.circle()()[1])==4
+	@test BoxCalculation(Collection.circle(1, 2*pi)()[1])==4 # è come di default
+	@test BoxCalculation(Collection.circle(2., 2*pi)()[1])==16
+	@test BoxCalculation(Collection.circle(3, 2*pi)()[1])==36
+	@test BoxCalculation(Collection.circle(5, pi/2)()[1])==25 #aggiunto
+	@test BoxCalculation(Collection.circle(7, 2*pi)()[1])==196
 
-	@test length(Lar.circle(3,2*pi)([60])[2])==60
-	@test size(Lar.circle(3,2*pi)([60])[1])==(2,60)   #aggiunta in modo corretto
+	@test length(Collection.circle(3,2*pi)([60])[2])==60
+	@test size(Collection.circle(3,2*pi)([60])[1])==(2,60)   #aggiunta in modo corretto
 end
 
 @testset "helix" begin
-	@test BoxCalculation(Lar.helix()()[1])==8
-	@test BoxCalculation(Lar.helix(2, 2, 2)()[1])==64
-	@test BoxCalculation(Lar.helix(1, 2, 5)()[1])==40
-	@test BoxCalculation(Lar.helix(1, 1, 3)()[1])==12
-	@test BoxCalculation(Lar.helix(1, 2, 3)()[1])==24 #aggiunta
-	@test size(Lar.helix(5, 7, 9)()[1],2)==325
-	@test length(Lar.helix(5, 7, 9)()[2])==324
+	@test BoxCalculation(Collection.helix()()[1])==8
+	@test BoxCalculation(Collection.helix(2, 2, 2)()[1])==64
+	@test BoxCalculation(Collection.helix(1, 2, 5)()[1])==40
+	@test BoxCalculation(Collection.helix(1, 1, 3)()[1])==12
+	@test BoxCalculation(Collection.helix(1, 2, 3)()[1])==24 #aggiunta
+	@test size(Collection.helix(5, 7, 9)()[1],2)==325
+	@test length(Collection.helix(5, 7, 9)()[2])==324
 end
 
 @testset "disk" begin
-	@test BoxCalculation(Lar.disk(1., 2*pi)([36, 1])[1])==4
-	@test BoxCalculation(Lar.disk(2., 2*pi)()[1])==16
-	@test BoxCalculation(Lar.disk(2., pi)()[1])==8
-	@test BoxCalculation(Lar.disk(2., pi/2)()[1])==4
+	@test BoxCalculation(Collection.disk(1., 2*pi)([36, 1])[1])==4
+	@test BoxCalculation(Collection.disk(2., 2*pi)()[1])==16
+	@test BoxCalculation(Collection.disk(2., pi)()[1])==8
+	@test BoxCalculation(Collection.disk(2., pi/2)()[1])==4
 
-	@test size(Lar.disk(10, pi/7)()[1],2)==75
-	@test length(Lar.disk(10, pi/7)()[2])==108
+	@test size(Collection.disk(10, pi/7)()[1],2)==75
+	@test length(Collection.disk(10, pi/7)()[2])==108
 end
 
 @testset "helicoid" begin
-	@test BoxCalculation(Lar.helicoid()()[1])==8
-	@test BoxCalculation(Lar.helicoid(2,1,2,2)()[1])==64
-	@test BoxCalculation(Lar.helicoid(1,.5,2,5)()[1])==40
-	@test BoxCalculation(Lar.helicoid(1,.3,1,3)()[1])==12
-	@test BoxCalculation(Lar.helicoid(1,.3,0,2)()[1])==0    #aggiunta
+	@test BoxCalculation(Collection.helicoid()()[1])==8
+	@test BoxCalculation(Collection.helicoid(2,1,2,2)()[1])==64
+	@test BoxCalculation(Collection.helicoid(1,.5,2,5)()[1])==40
+	@test BoxCalculation(Collection.helicoid(1,.3,1,3)()[1])==12
+	@test BoxCalculation(Collection.helicoid(1,.3,0,2)()[1])==0    #aggiunta
 
-	@test size(Lar.helicoid(1.3,.7,1,3)()[1],2)==327
-	@test length(Lar.helicoid(1.3,.7,1,3)()[2])==432
+	@test size(Collection.helicoid(1.3,.7,1,3)()[1],2)==327
+	@test length(Collection.helicoid(1.3,.7,1,3)()[2])==432
 end
 
 @testset "ring" begin
-	@test BoxCalculation(Lar.ring(1.,3.,2*pi)()[1])==36
-	@test BoxCalculation(Lar.ring(1.,2,pi)()[1])==8
-	@test BoxCalculation(Lar.ring(1.,5,pi/2)()[1])==25
+	@test BoxCalculation(Collection.ring(1.,3.,2*pi)()[1])==36
+	@test BoxCalculation(Collection.ring(1.,2,pi)()[1])==8
+	@test BoxCalculation(Collection.ring(1.,5,pi/2)()[1])==25
 
-	@test size(Lar.ring(1,5,pi/2)()[1],2)==74
-	@test length(Lar.ring(5,10,pi/6)()[2])==72
+	@test size(Collection.ring(1,5,pi/2)()[1],2)==74
+	@test length(Collection.ring(5,10,pi/6)()[2])==72
 end
 
 @testset "cylinder" begin
-	@test BoxCalculation(Lar.cylinder(1,5,2*pi)()[1])==20
-	@test BoxCalculation(Lar.cylinder(2,2,pi)()[1])==16
-	@test BoxCalculation(Lar.cylinder(1,4,pi)()[1])==8
+	@test BoxCalculation(Collection.cylinder(1,5,2*pi)()[1])==20
+	@test BoxCalculation(Collection.cylinder(2,2,pi)()[1])==16
+	@test BoxCalculation(Collection.cylinder(1,4,pi)()[1])==8
 
-	@test size(Lar.cylinder(3.4,20,pi/7)()[1],2)==74 #aggiunta
-	@test length(Lar.cylinder(3.4,20,pi/7)()[2])==72
+	@test size(Collection.cylinder(3.4,20,pi/7)()[1],2)==74 #aggiunta
+	@test length(Collection.cylinder(3.4,20,pi/7)()[2])==72
 end
 
 @testset "sphere" begin
-	@test BoxCalculation(Lar.sphere(2,pi,2*pi)()[1])==64
-	@test BoxCalculation(Lar.sphere(6,pi,pi)()[1])==864
-	@test BoxCalculation(Lar.sphere(4,pi,2*pi)()[1])==8^3
-	@test size(Lar.sphere(2.5,pi/3,pi/5)()[1],2)==703
-	@test length(Lar.sphere(2.5,pi/3,pi/5)()[2])==1296
+	@test BoxCalculation(Collection.sphere(2,pi,2*pi)()[1])==64
+	@test BoxCalculation(Collection.sphere(6,pi,pi)()[1])==864
+	@test BoxCalculation(Collection.sphere(4,pi,2*pi)()[1])==8^3
+	@test size(Collection.sphere(2.5,pi/3,pi/5)()[1],2)==703
+	@test length(Collection.sphere(2.5,pi/3,pi/5)()[2])==1296
 end
 
 @testset "toroidal" begin
-	@test BoxCalculation(Lar.toroidal(1,3,2*pi,2*pi)()[1])==128
-	@test BoxCalculation(Lar.toroidal(2,3,2*pi,2*pi)()[1])==400
+	@test BoxCalculation(Collection.toroidal(1,3,2*pi,2*pi)()[1])==128
+	@test BoxCalculation(Collection.toroidal(2,3,2*pi,2*pi)()[1])==400
 
-	@test size(Lar.toroidal(1.3,4.6,pi/4,pi/7)()[1],2)==925
-	@test length(Lar.toroidal(1.3,4.6,pi/4,pi/7)()[2])==1728
+	@test size(Collection.toroidal(1.3,4.6,pi/4,pi/7)()[1],2)==925
+	@test length(Collection.toroidal(1.3,4.6,pi/4,pi/7)()[2])==1728
 end
 
 @testset "crown" begin
-	@test BoxCalculation(Lar.crown(1., 3., 2*pi)()[1])==128
-	@test BoxCalculation(Lar.crown(2., 3., 2*pi)()[1])==400
+	@test BoxCalculation(Collection.crown(1., 3., 2*pi)()[1])==128
+	@test BoxCalculation(Collection.crown(2., 3., 2*pi)()[1])==400
 
-	@test size(Lar.crown(1.5, 5.6, pi/8)()[1],2)==481
-	@test length(Lar.crown(1.5, 5.6, pi/8)()[2])==864
+	@test size(Collection.crown(1.5, 5.6, pi/8)()[1],2)==481
+	@test length(Collection.crown(1.5, 5.6, pi/8)()[2])==864
 end
 
 @testset "ball" begin
-	@test BoxCalculation(Lar.ball(1, pi, 2*pi)()[1])==8
-	@test BoxCalculation(Lar.ball(6, pi, pi)()[1])==864
-	@test BoxCalculation(Lar.ball(3, pi, 2*pi)()[1])==6^3
-	@test size(Lar.ball(2.6, pi/5, pi/9)()[1],2)==2813
-	@test length(Lar.ball(2.6, pi/5, pi/9)()[2])==2592
+	@test BoxCalculation(Collection.ball(1, pi, 2*pi)()[1])==8
+	@test BoxCalculation(Collection.ball(6, pi, pi)()[1])==864
+	@test BoxCalculation(Collection.ball(3, pi, 2*pi)()[1])==6^3
+	@test size(Collection.ball(2.6, pi/5, pi/9)()[1],2)==2813
+	@test length(Collection.ball(2.6, pi/5, pi/9)()[2])==2592
 end
 
 @testset "rod" begin
-	@test BoxCalculation(Lar.rod(1,5,2*pi)()[1])==20
-	@test BoxCalculation(Lar.rod(2,2,pi)()[1])==16
-	@test BoxCalculation(Lar.rod(1,4,pi)()[1])==8
+	@test BoxCalculation(Collection.rod(1,5,2*pi)()[1])==20
+	@test BoxCalculation(Collection.rod(2,2,pi)()[1])==16
+	@test BoxCalculation(Collection.rod(1,4,pi)()[1])==8
 
-	@test size(Lar.rod(3.7,8.9,pi/9)()[1],2)==74
-	@test length(Lar.rod(3.7,8.9,pi/9)()[2])==1
+	@test size(Collection.rod(3.7,8.9,pi/9)()[1],2)==74
+	@test length(Collection.rod(3.7,8.9,pi/9)()[2])==1
 end
 
 @testset "hollowCyl" begin
-	@test BoxCalculation(Lar.hollowCyl(0,1.,5,2*pi)()[1])==20
-	@test BoxCalculation(Lar.hollowCyl(1,2.,4,pi)()[1])==32
-	@test BoxCalculation(Lar.hollowCyl(1,4,3,pi/2)()[1])==48
+	@test BoxCalculation(Collection.hollowCyl(0,1.,5,2*pi)()[1])==20
+	@test BoxCalculation(Collection.hollowCyl(1,2.,4,pi)()[1])==32
+	@test BoxCalculation(Collection.hollowCyl(1,4,3,pi/2)()[1])==48
 
-	@test size(Lar.hollowCyl(3,4.,7.8,pi/5)()[1],2)==148
-	@test length(Lar.hollowCyl(3,4.,7.8,pi/5)()[2])==36
+	@test size(Collection.hollowCyl(3,4.,7.8,pi/5)()[1],2)==148
+	@test length(Collection.hollowCyl(3,4.,7.8,pi/5)()[2])==36
 end
 
 @testset "hollowBall" begin
-	@test BoxCalculation(Lar.hollowBall(1,2,pi,2*pi)([36,36,1])[1]) ==64
-	@test BoxCalculation(Lar.hollowBall(1,6,pi,pi)([36,36,1])[1])== 864
-	@test BoxCalculation(Lar.hollowBall(2,4,pi,2*pi)([36,36,1])[1])==8^3
+	@test BoxCalculation(Collection.hollowBall(1,2,pi,2*pi)([36,36,1])[1]) ==64
+	@test BoxCalculation(Collection.hollowBall(1,6,pi,pi)([36,36,1])[1])== 864
+	@test BoxCalculation(Collection.hollowBall(2,4,pi,2*pi)([36,36,1])[1])==8^3
 
-	@test size(Lar.hollowBall(1.5,6.7,pi/3,2*pi/3)()[1],2)==3700
-	@test length(Lar.hollowBall(1.5,6.7,pi/3,2*pi/3)()[2])==2592
+	@test size(Collection.hollowBall(1.5,6.7,pi/3,2*pi/3)()[1],2)==3700
+	@test length(Collection.hollowBall(1.5,6.7,pi/3,2*pi/3)()[2])==2592
 end
 
 @testset "torus" begin
-	@test BoxCalculation(Lar.torus(1.,2.,.5,2*pi,2*pi)()[1])==147
-	@test BoxCalculation(Lar.torus(2,3,.5,2*pi,2*pi)()[1])==605.0
+	@test BoxCalculation(Collection.torus(1.,2.,.5,2*pi,2*pi)()[1])==147
+	@test BoxCalculation(Collection.torus(2,3,.5,2*pi,2*pi)()[1])==605.0
 
-	@test size(Lar.torus(5.2,7,.5,pi/3,pi/4)()[1],2)==4625
-	@test length(Lar.torus(5.2,7,.5,pi/3,pi/4)()[2])==3456
+	@test size(Collection.torus(5.2,7,.5,pi/3,pi/4)()[1],2)==4625
+	@test length(Collection.torus(5.2,7,.5,pi/3,pi/4)()[2])==3456
 end

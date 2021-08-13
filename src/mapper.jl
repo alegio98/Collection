@@ -69,7 +69,7 @@ julia> GL.VIEW([
 """
 function circle(radius=1., angle=2*pi)
     function circle0(shape=[36])
-        V, EV = cuboidGrid(shape)
+        V, EV = Lar.cuboidGrid(shape)
         V = (angle/shape[1])*V
         V = hcat(map(u->[radius*cos(u); radius*sin(u)], V)...)
         W, EW = simplifyCells(V, EV)
@@ -95,7 +95,7 @@ julia> GL.VIEW([
 function helix(radius=1., pitch=1., nturns=2)
     function helix0(shape=36*nturns)
         angle = nturns*2*pi
-        V, EV = cuboidGrid([shape])
+        V, EV = Lar.cuboidGrid([shape])
         V = (angle/shape)*V
         V = hcat(map(u->[radius*cos(u);radius*sin(u);(pitch/(2*pi))*u], V)...)
         W, EW = simplifyCells(V, EV)
@@ -118,7 +118,7 @@ julia> GL.VIEW([
 """
 function disk(radius=1., angle=2*pi)
     function disk0(shape=[36, 2])
-        V, FV = simplexGrid(shape)
+        V, FV = Lar.simplexGrid(shape)
         V = [angle/shape[1] 0;0 radius/shape[2]]*V
         W = [V[:, k] for k=1:size(V, 2)]
         V = hcat(map(p->let(u, v)=p;[v*cos(u);v*sin(u)] end, W)...)
@@ -145,7 +145,7 @@ julia> GL.VIEW([
 function helicoid(R=1., r=0.5, pitch=1., nturns=2)
     function helicoid0(shape=[36*nturns, 2])
         angle = nturns*2*pi
-        V, CV = simplexGrid(shape)
+        V, CV = Lar.simplexGrid(shape)
         V = [angle/shape[1] 0;0 (R-r)/shape[2]]*V
         V = broadcast(+, V, [0, r])
         W = [V[:, k] for k=1:size(V, 2)]
@@ -170,7 +170,7 @@ julia> GL.VIEW([
 """
 function ring(r=1., R=2., angle=2*pi)
     function ring0(shape=[36, 1])
-		V, CV = cuboidGrid(shape)
+		V, CV = Lar.cuboidGrid(shape)
 		CV = [[[u,v,w],[w,v,t]] for (u,v,w,t) in CV]
 		CV = reduce(append!,CV)
         V = [angle/shape[1] 0;0 (R-r)/shape[2]]*V
@@ -227,7 +227,7 @@ julia> GL.VIEW([
 @enum surface triangled=1 single=2
 function sphere(radius=1., angle1=pi, angle2=2*pi, surface=triangled)
     function sphere0(shape=[18, 36])
-        V, CV = simplexGrid(shape)
+        V, CV = Lar.simplexGrid(shape)
         V = [angle1/shape[1] 0;0 angle2/shape[2]]*V
         V = broadcast(+, V, [-angle1/2, -angle2/2])
         W = [V[:, k] for k=1:size(V, 2)]
@@ -261,7 +261,7 @@ julia> GL.VIEW([
 """
 function toroidal(r=1., R=2., angle1=2*pi, angle2=2*pi)
     function toroidal0(shape=[24, 36])
-        V, CV = simplexGrid(shape)
+        V, CV = Lar.simplexGrid(shape)
         V = [angle1/(shape[1]) 0;0 angle2/(shape[2])]*V
         W = [V[:, k] for k=1:size(V, 2)]
         V = hcat(map(p->let(u, v)=p;[(R+r*cos(u))*cos(v);
@@ -288,7 +288,7 @@ julia> GL.VIEW([
 """
 function crown(r=1., R=2., angle=2*pi)
     function crown0(shape=[12, 36])
-        V, CV = simplexGrid(shape)
+        V, CV = Lar.simplexGrid(shape)
         V = [pi/shape[1] 0;0 angle/shape[2]]*V
         V = broadcast(+, V, [-pi/2, 0])
         W = [V[:, k] for k=1:size(V, 2)]
@@ -328,7 +328,7 @@ function cuboid(maxpoint::Array, full=false,
 	@assert( length(minpoint) == length(maxpoint) )
 	dim = length(minpoint)
 	shape = ones(Int, dim)
-	cell = cuboidGrid(shape, full)
+	cell = Lar.cuboidGrid(shape, full)
 	size = maxpoint - minpoint
 	out = apply(t(minpoint...) * s(size...), cell)
 end
@@ -348,7 +348,7 @@ julia> GL.VIEW([
 """
 function ball(radius=1, angle1=pi, angle2=2*pi)
     function ball0(shape=[18, 36, 4])
-        V, CV = cuboidGrid(shape)
+        V, CV = Lar.cuboidGrid(shape)
         V = [angle1/shape[1] 0 0; 0 angle2/shape[2] 0; 0 0 radius/shape[3]]*V
         V = broadcast(+, V, [-(angle1)/2, -(angle2)/2, 0])
         W = [V[:, k] for k=1:size(V, 2)]
@@ -405,7 +405,7 @@ julia> GL.VIEW([
 """
 function hollowCyl(r=1., R=2., height=6., angle=2*pi)
     function hollowCyl0(shape=[36, 1, 1])
-        V, CV = cuboidGrid(shape)
+        V, CV = Lar.cuboidGrid(shape)
         V = [angle/shape[1] 0 0;0 (R-r)/shape[2] 0;0 0 height/shape[3]]*V
         V = broadcast(+, V, [0, r, 0])
         W = [V[:, k] for k=1:size(V, 2)]
@@ -432,7 +432,7 @@ julia> GL.VIEW([
 """
 function hollowBall(r=1., R=1., angle1=pi, angle2=2*pi)
     function hollowBall0(shape=[24, 36, 3])
-        V, CV = cuboidGrid(shape)
+        V, CV = Lar.cuboidGrid(shape)
         V = [angle1/shape[1] 0 0; 0 angle2/shape[2] 0; 0 0 (R-r)/shape[3]]*V
         V = broadcast(+, V, [-(angle1)/2, -(angle2)/2, r])
         W = [V[:, k] for k=1:size(V, 2)]
@@ -458,7 +458,7 @@ julia> GL.VIEW([
 """
 function torus(r=1., R=2., h=.5, angle1=2*pi, angle2=2*pi)
     function torus0(shape=[24, 36, 4])
-        V, CV = cuboidGrid(shape)
+        V, CV = Lar.cuboidGrid(shape)
         V = [angle1/shape[1] 0 0;0 angle2/shape[2] 0;0 0 r/shape[3]]*V
         V = broadcast(+, V, [0, 0, h])
         W = [V[:, k] for k=1:size(V, 2)]

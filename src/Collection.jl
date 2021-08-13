@@ -6,6 +6,6 @@ using ViewerGL
 GL = ViewerGL
 using BenchmarkTools
 
-include("mapper.jl") 
+include("mapper.jl")
 
 end
