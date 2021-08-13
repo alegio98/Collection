@@ -1,6 +1,6 @@
 # Calcolo Parallelo e Distribuito - Relazione progetto "COLLECTION"  
 
-URL Repository Git : [*https://github.com/alegio98/Collection*](https://github.com/alegio98/Collection)
+URL Repository Git : [*https://github.com/alegio98/Collection*](https://github.com/alegio98/Collection.jl)
 
 
 
