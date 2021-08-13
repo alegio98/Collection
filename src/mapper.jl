@@ -124,7 +124,6 @@ function disk(radius=1., angle=2*pi)
         V = hcat(map(p->let(u, v)=p;[v*cos(u);v*sin(u)] end, W)...)
         W, FW = simplifyCells(V, FV)
         FW = [cell for cell in FW if length(cell)==3]
-		#EW = Lar.simplexFacets(FW)
         return W, FW #, EW
     end
     return disk0
